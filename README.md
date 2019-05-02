@@ -1,11 +1,27 @@
-# Blackbox exporter [![Build Status](https://travis-ci.org/prometheus/blackbox_exporter.svg)][travis]
+<!-- # Blackbox exporter [![Build Status](https://travis-ci.org/prometheus/blackbox_exporter.svg)][travis] -->
+# Blackbox exporter
 
-[![CircleCI](https://circleci.com/gh/prometheus/blackbox_exporter/tree/master.svg?style=shield)][circleci]
+<!-- [![CircleCI](https://circleci.com/gh/prometheus/blackbox_exporter/tree/master.svg?style=shield)][circleci]
 [![Docker Repository on Quay](https://quay.io/repository/prometheus/blackbox-exporter/status)][quay]
-[![Docker Pulls](https://img.shields.io/docker/pulls/prom/blackbox-exporter.svg?maxAge=604800)][hub]
+[![Docker Pulls](https://img.shields.io/docker/pulls/prom/blackbox-exporter.svg?maxAge=604800)][hub] -->
 
 The blackbox exporter allows blackbox probing of endpoints over
 HTTP, HTTPS, DNS, TCP and ICMP.
+
+This is a total rewrite of the Prometheus project of the same name
+(`blackbox-exporter`), with the following goals:
+
+1. Support for HTTP probes with large request bodies:
+
+    The upstream blackbox exporter makes in-memory copies of probe request
+    bodies for each probe attempt. The result is that it is not suitable for
+    probes with large bodies (especially high-frequency probing, e.g., every
+    sec); the multitude of copying can completely occupy the CPU.
+2. a more modular and approachable codebase
+
+    The upstream blackbox-exporter was started in 2012 and has evolved
+    significantly, but it does not take advantage of many advances that have
+    arrived in the Go language and community, and it is not modular. 
 
 ## Building and running
 
